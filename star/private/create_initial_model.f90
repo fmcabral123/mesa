@@ -31,7 +31,7 @@
 
       implicit none
 
-      real(dp), parameter :: RHO_C_MS = 150
+      real(dp), parameter :: RHO_C_MS = 150.0_dp
 
       private
       public :: build_initial_model
@@ -346,7 +346,7 @@
             call get_TRho_from_PS(cs,P,S,T,rho)
 
             call get_kap_from_rhoT(cs,log10(rho),log10(T),kap)
-            grav = G * (4/3) * pi * RHO_C_MS * (y(1)) ! G*y(2)/(y(1)*y(1))
+            grav = G * (4.0_dp/3.0_dp) * pi * RHO_C_MS * (y(1)) ! G*y(2)/(y(1)*y(1))
             tau = kap * P / grav
 
             i=i+1
