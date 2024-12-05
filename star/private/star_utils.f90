@@ -36,6 +36,8 @@
       private :: mdb
       logical, parameter :: mdb = .false.
 
+      real(dp), parameter :: RHO_C_MS = 150
+
       contains
 
 
@@ -264,7 +266,8 @@
          nz = s% nz
          if (.not. s% use_mass_corrections) then
             do k=1,nz
-               s% m_grav(k) = s% m(k)
+               s% m_grav(k) = s% m(k) ! (4/3)*pi*RHO_C_MS*pow3(s% r(k))
+               ! mirror star gravity above
             end do
          else
             s% m_grav(nz) = &
