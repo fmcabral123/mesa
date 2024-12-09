@@ -419,8 +419,8 @@
          intdmT=y(3)
          call get_TRho_from_PS(cs,P,S,T,rho)
          !write(*,"(a24,10(2x,es15.8))") "S*mp/kb,lgPc,lgTc,rhoc=",S*mp/boltzm,log10(P),log10(T),rho
-         dydP(1)=-3/(rho*G*pi4*RHO_C_MS*r) ! -r*r/(G*m*rho)
-         dydP(2)=-(3*r)/(G*RHO_C_MS) ! -pi4*r*r*r*r/(G*m)
+         dydP(1)=-3.0_dp/(rho*G*pi4*RHO_C_MS*r) ! -r*r/(G*m*rho)
+         dydP(2)=-(3.0_dp*r)/(G*RHO_C_MS) ! -pi4*r*r*r*r/(G*m)
          dydP(3)=dydP(2)*T
 
       end subroutine
