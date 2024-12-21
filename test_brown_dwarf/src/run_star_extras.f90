@@ -36,6 +36,35 @@
       contains
 
       include "test_suite_extras.inc"
+
+      subroutine my_modified_momentum_implicit(id, ierr)
+         use star_def
+         use const_def, only: standard_cgrav
+         implicit none
+         integer, intent(in) :: id
+         integer, intent(out) :: ierr
+         type (star_info), pointer :: s
+         integer :: k
+         real(dp) :: rho_cms, G, r, enclosed_mass
+         ierr = 0
+
+         ! Constant
+         rho_cms = 150.0_dp ! g/cm^3
+         G = standard_cgrav
+
+         call star_ptr(id, s, ierr)
+         if (ierr /= 0) return
+
+         do k = 1, s%nz
+            ! Radius at zone k
+            r = s%r(k)
+
+            enclosed_mass = (4.0_dp / 3.0_dp) * pi * rho_cms * r**3
+
+            ! Extra gravitational acceleration term: -G_grav * enclosed_mass / r^2
+            s%extra_grav(k) = -G * enclosed_mass / r**2
+         end do
+      end subroutine my_modified_momentum_implicit
       
       subroutine my_modified_cgrav(id, ierr)
          use star_def
@@ -82,6 +111,7 @@
          if (ierr /= 0) return
 
          s% other_cgrav => my_modified_cgrav
+         s% other_momentum_implicit => my_modified_momentum_implicit
 
          s% extras_startup => extras_startup
          s% extras_check_model => extras_check_model

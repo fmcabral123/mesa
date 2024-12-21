@@ -39,6 +39,7 @@
 
    extra_power_source = 1d10
    use_other_cgrav = .true.
+   use_other_momentum_implicit = .false.
 
    ! limit max_model_number as part of test_suite
    max_model_number = 900
