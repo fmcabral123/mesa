@@ -9,11 +9,8 @@
    save_model_filename = 'final.mod'
    required_termination_code_string = 'max_age'
 
-   ! mass_in_gm_for_create_initial_model = 1.9892d31 0.01 Msun;  m_jupiter = 1.8986d30; msun = 1.9892d33
-   ! radius_in_cm_for_create_initial_model = 3.5d10 5 r_jupiter; r_jupiter = 6.9911d9.  ok for most brown dwarfs.
-
-   mass_in_gm_for_create_initial_model = 1d20
-   radius_in_cm_for_create_initial_model = 1d9
+   mass_in_gm_for_create_initial_model = 1.6621597e21
+   radius_in_cm_for_create_initial_model = 1.5129674e9
 
    max_tries_for_create_initial_model = 1000
 

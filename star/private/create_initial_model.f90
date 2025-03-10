@@ -250,6 +250,25 @@
             s% dq(k) = s% q(k) - s% q(k+1)
          end do
 
+         ! Open a file to write data for plotting (change file location as needed)
+         open(unit=10, file='~/model_output.txt', status='replace')
+
+         ! Write the header row with all requested variables
+         write(10, '(A)') 'r  P  T  rho  lnd  lnT  lnR  L  dq  mlt_vc  h1  he3  he4  c12  n14  o16  ne20  mg24'
+
+         ! Write the data for each radial point
+         do i = 1, cs% nz
+            write(10, '(19ES25.16)') cs% rg(i), cs% Pg(i), cs% Tg(i), cs% rhog(i), &
+                         log(cs% rhog(i)), log(cs% Tg(i)), log(cs% rg(i)), &
+                         cs% Lg(i), s% dq(i), s% mlt_vc(i), &
+                         s% xa(1, i), s% xa(2, i), s% xa(3, i), &
+                         s% xa(4, i), s% xa(5, i), s% xa(6, i), &
+                         s% xa(7, i), s% xa(8, i)
+         end do
+
+         close(10)
+         write(*,*) 'Model data written to model_output.txt'
+
          write(*,*) 'done build_initial_model'
 
       end subroutine build_initial_model
